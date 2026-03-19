@@ -5,6 +5,9 @@ const {
   subtraction,
   multiplication,
   division,
+  modulo,
+  power,
+  squareRoot,
 } = require('../calculator');
 
 describe('calculator basic operations', () => {
@@ -81,6 +84,56 @@ describe('calculator basic operations', () => {
 
     test('throws for invalid numbers', () => {
       expect(() => division(10, 'abc')).toThrow('Right operand must be a valid number.');
+    });
+  });
+
+  describe('modulo', () => {
+    test('matches the extended image example with modulo 5 % 2', () => {
+      expect(modulo(5, 2)).toBe(1);
+    });
+
+    test('accepts numeric strings', () => {
+      expect(modulo('11', '4')).toBe(3);
+    });
+
+    test('throws for modulo by zero', () => {
+      expect(() => modulo(10, 0)).toThrow('Modulo by zero is not allowed.');
+    });
+  });
+
+  describe('power', () => {
+    test('matches the extended image example with power 2 ^ 3', () => {
+      expect(power(2, 3)).toBe(8);
+    });
+
+    test('supports negative exponents', () => {
+      expect(power(2, -2)).toBeCloseTo(0.25);
+    });
+
+    test('throws for invalid numbers', () => {
+      expect(() => power('two', 3)).toThrow('Base must be a valid number.');
+    });
+  });
+
+  describe('square root', () => {
+    test('matches the extended image example with square root of 16', () => {
+      expect(squareRoot(16)).toBe(4);
+    });
+
+    test('supports zero', () => {
+      expect(squareRoot(0)).toBe(0);
+    });
+
+    test('accepts numeric strings', () => {
+      expect(squareRoot('25')).toBe(5);
+    });
+
+    test('throws for negative numbers', () => {
+      expect(() => squareRoot(-1)).toThrow('Square root of a negative number is not allowed.');
+    });
+
+    test('throws for invalid numbers', () => {
+      expect(() => squareRoot('abc')).toThrow('Value must be a valid number.');
     });
   });
 });
